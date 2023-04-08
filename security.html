@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {
+  background: url('numbers2.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+  }
+  
+    </style>
+<head>
+    <title>Text File Encryption/Decryption</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        function handleFileSelect(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var fileContent = e.target.result;
+                document.getElementById('output').textContent = fileContent;
+                document.getElementById('encryptBtn').disabled = false;
+                document.getElementById('decryptBtn').disabled = false;
+            };
+            reader.readAsText(file);
+        }
+
+        function encryptFile() {
+            var fileContent = document.getElementById('output').textContent;
+            var password = prompt("Enter password for encryption:");
+            var encryptedContent = CryptoJS.AES.encrypt(fileContent, password).toString();
+            document.getElementById('output').textContent = encryptedContent;
+        }
+
+        function decryptFile() {
+            var encryptedContent = document.getElementById('output').textContent;
+            var password = prompt("Enter password for decryption:");
+            var decryptedContent = CryptoJS.AES.decrypt(encryptedContent, password).toString(CryptoJS.enc.Utf8);
+            document.getElementById('output').textContent = decryptedContent;
+        }
+
+        function downloadFile() {
+            var fileContent = document.getElementById('output').textContent;
+            var fileName = document.getElementById('fileInput').files[0].name;
+            var fileType = document.getElementById('fileInput').files[0].type;
+            var file = new Blob([fileContent], {type: fileType});
+            var a = document.createElement("a");
+            var url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    </script>
+</head>
+<body>
+    <h1>Text File Encryption/Decryption</h1>
+    <input type="file" id="fileInput" />
+    <br>
+    <button onclick="handleFileSelect(event)">Load File</button>
+    <br><br>
+    <textarea id="output" rows="10" cols="50" readonly></textarea>
+    <br><br>
+    <button id="encryptBtn" onclick="encryptFile()" disabled>Encrypt</button>
+    <button id="decryptBtn" onclick="decryptFile()" disabled>Decrypt</button>
+    <br><br>
+    <button onclick="downloadFile()">Download</button>
+</body>
+</html>
