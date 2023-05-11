@@ -1,0 +1,34 @@
+Title: File Encryption/Decryption
+
+Description:
+This project is a web-based application that allows users to upload a file, encrypt or decrypt the file using AES-CBC 256-bit symmetric encryption, and download the encrypted or decrypted file. The code uses the CryptoJS library, a popular JavaScript library for cryptographic operations, to perform the encryption and decryption.
+
+Functionality:
+
+    File Upload: Users can select a file using the "Load File" button, and the contents of the file will be displayed in a textarea element with the id "output".
+
+    Encryption: Users can click on the "Encrypt" button to encrypt the contents of the file. A password prompt will appear, and the entered password will be used for encryption. The encrypted content will be displayed in the textarea element with the id "output".
+
+    Decryption: Users can click on the "Decrypt" button to decrypt the encrypted contents of the file. A password prompt will appear, and the entered password will be used for decryption. The decrypted content will be displayed in the textarea element with the id "output".
+
+    Download: Users can click on the "Download" button to download the contents of the textarea element with the id "output" as a file. The original filename and file type will be preserved in the downloaded file.
+
+Supported File Types:
+The code can handle text files (.txt) as it reads the contents of the file using the FileReader.readAsText() method, which treats the file as plain text. Other file types, such as binary files or non-text files, may not be supported by this code.
+
+Security:
+The code uses AES-CBC 256-bit symmetric encryption, which is a widely used and secure encryption algorithm. However, the security of the encryption depends on the strength of the password chosen by the user. It is important to choose a strong, unique password to ensure the confidentiality of the encrypted data.
+
+Limitations:
+
+    The code only supports text files (.txt) as it reads the contents of the file as plain text using the FileReader.readAsText() method. Other file types may not be supported.
+
+    The code does not provide any authentication or authorization mechanisms. It solely relies on the password provided by the user for encryption and decryption. Additional security measures, such as user authentication and authorization, may need to be implemented depending on the specific use case and security requirements.
+
+    The code does not provide any error handling for incorrect passwords or file upload failures. Proper error handling should be implemented to handle such scenarios in a real-world application.
+
+    The code does not provide any key management functionality, such as securely storing or exchanging encryption keys. Proper key management is crucial for ensuring the security of encrypted data in a real-world application.
+
+    The code does not handle large files or streaming of file contents. It reads the entire contents of the file into memory, which may not be suitable for large files. Proper handling of large files and streaming of file contents should be implemented in a real-world application.
+
+Overall, this code provides a basic implementation of file encryption and decryption using AES-CBC 256-bit symmetric encryption in a web-based application. It can be used as a starting point for further enhancements and customizations based on specific use cases and security requirements. Proper security measures, such as strong password management, user authentication and authorization, error handling, and key management, should be implemented in a real-world application to ensure the security and confidentiality of the encrypted data. Additionally, it is important to thoroughly test the code and conduct security assessments to identify and address any potential vulnerabilities or weaknesses. We will be working on optimising the code and tackling the limitations one by one in due diligence.
